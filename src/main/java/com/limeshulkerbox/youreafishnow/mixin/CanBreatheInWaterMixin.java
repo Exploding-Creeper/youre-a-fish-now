@@ -4,8 +4,12 @@ import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.fluid.Fluid;
+import net.minecraft.tag.FluidTags;
+import net.minecraft.tag.Tag;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.Unique;
 
 @Mixin(PlayerEntity.class)
@@ -21,14 +25,14 @@ public abstract class CanBreatheInWaterMixin extends LivingEntity {
 
 	@Unique
 	protected void tickWaterBreathingAir(int air) {
-		if (this.isAlive() && !this.isInsideWaterOrBubbleColumn()) {
+		if (this.isAlive() && !this.isSubmergedIn(FluidTags.WATER)) {
 			this.setAir(air - 1);
 			if (this.getAir() == -20) {
 				this.setAir(0);
 				this.damage(DamageSource.DROWN, 2.0F);
 			}
 		} else {
-			this.setAir(300);
+			this.setAir(getNextAirOnLand(air));
 		}
 
 	}

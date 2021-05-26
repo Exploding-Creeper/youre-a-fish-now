@@ -4,9 +4,9 @@
   "package": "com.limeshulkerbox.youreafishnow.mixin",
   "compatibilityLevel": "JAVA_8",
   "mixins": [
-  ],
-  "client": [
-    "CanBreatheInWaterMixin"
+    "ChangeBreakSpeedMixin",
+    "CanBreatheInWaterMixin",
+    "RenderBubblesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
