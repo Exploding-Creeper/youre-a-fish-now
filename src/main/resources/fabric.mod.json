@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "id": "youre-a-fish-now",
+  "version": "${version}",
+
+  "name": "You're a fish now",
+  "description": "Changes your breathing habits to breathe underwater like a fish!",
+  "authors": [
+    "LimeShulkerBox",
+    "hamarb123"
+  ],
+  "contact": {
+    "homepage": "https://www.curseforge.com/minecraft/mc-mods/youre-a-fish-now",
+    "sources": "https://github.com/LimeShulkerBox/youre-a-fish-now"
+  },
+
+  "license": "CC0-1.0",
+  "icon": "assets/modid/icon.png",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "com.limeshulkerbox.youreafishnow.CanBreatheInWaterMixinInitializer"
+    ]
+  },
+  "mixins": [
+    "modid.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.7.4",
+    "minecraft": "1.16.x"
+  },
+  "suggests": {
+    "another-mod": "*"
+  }
+}
