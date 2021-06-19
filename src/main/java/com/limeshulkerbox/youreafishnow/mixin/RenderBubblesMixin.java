@@ -12,6 +12,7 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.network.MessageType;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.tag.FluidTags;
 import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
@@ -28,6 +29,8 @@ import java.util.Random;
 
 @Mixin(InGameHud.class)
 public abstract class RenderBubblesMixin extends DrawableHelper {
+
+
 
     @Shadow @Final private MinecraftClient client;
     @Shadow private int scaledWidth;
@@ -66,9 +69,6 @@ public abstract class RenderBubblesMixin extends DrawableHelper {
 
                 for(int ar = 0; ar < ae + al; ++ar) {
                     if (ar < ae) {
-                        System.out.println("ar = " + ar);
-                        System.out.println("ae = " + ae);
-                        System.out.println("al = " + al);
                         this.drawTexture(matrices, n - ar * 8 - 9, t, 16, 18, 9, 9);
                     } else {
                         this.drawTexture(matrices, n - ar * 8 - 9, t, 25, 18, 9, 9);

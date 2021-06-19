@@ -6,7 +6,9 @@
   "name": "You're a fish now",
   "description": "Changes your breathing habits to breathe underwater like a fish!",
   "authors": [
-    "LimeShulkerBox",
+    "LimeShulkerBox"
+  ],
+  "contributors": [
     "hamarb123"
   ],
   "contact": {
@@ -28,8 +30,9 @@
   ],
 
   "depends": {
-    "fabricloader": ">=0.7.4",
-    "minecraft": "1.16.x"
+    "fabricloader": ">=0.11.3",
+    "minecraft": "1.17.x",
+    "java": ">=16"
   },
   "suggests": {
     "another-mod": "*"

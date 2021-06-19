@@ -1,60 +1,28 @@
 package com.limeshulkerbox.youreafishnow.mixin;
 
-import com.google.common.collect.ImmutableList;
-import com.mojang.authlib.GameProfile;
-import com.mojang.datafixers.util.Either;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.entity.CommandBlockBlockEntity;
-import net.minecraft.block.entity.JigsawBlockEntity;
-import net.minecraft.block.entity.SignBlockEntity;
-import net.minecraft.block.entity.StructureBlockBlockEntity;
-import net.minecraft.client.render.entity.PlayerModelPart;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.entity.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.data.TrackedData;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectUtil;
 import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.passive.HorseBaseEntity;
-import net.minecraft.entity.player.*;
-import net.minecraft.entity.projectile.FishingBobberEntity;
-import net.minecraft.inventory.EnderChestInventory;
-import net.minecraft.inventory.Inventory;
+import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.particle.ParticleEffect;
-import net.minecraft.recipe.Recipe;
-import net.minecraft.scoreboard.Scoreboard;
-import net.minecraft.screen.NamedScreenHandlerFactory;
-import net.minecraft.screen.PlayerScreenHandler;
-import net.minecraft.screen.ScreenHandler;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.stat.Stat;
 import net.minecraft.tag.FluidTags;
-import net.minecraft.text.MutableText;
-import net.minecraft.text.Text;
-import net.minecraft.util.*;
-import net.minecraft.util.math.BlockPos;
-import net.minecraft.util.math.Direction;
-import net.minecraft.util.math.Vec3d;
-import net.minecraft.village.TradeOfferList;
-import net.minecraft.world.CommandBlockExecutor;
-import net.minecraft.world.GameMode;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
-import org.spongepowered.asm.mixin.*;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.Final;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
+import org.spongepowered.asm.mixin.Shadow;
+import oshi.annotation.concurrent.NotThreadSafe;
 
-import java.util.*;
+import java.util.Objects;
 
 @Mixin(PlayerEntity.class)
 public abstract class ChangeBreakSpeedMixin extends LivingEntity {
-    @Shadow @Final public PlayerInventory inventory;
+    @Shadow @Final
+    private PlayerInventory inventory;
 
     protected ChangeBreakSpeedMixin(EntityType<? extends LivingEntity> entityType, World world) {
         super(entityType, world);
