@@ -13,9 +13,10 @@ import net.minecraft.tag.FluidTags;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import oshi.annotation.concurrent.NotThreadSafe;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Objects;
 
@@ -32,50 +33,50 @@ public abstract class ChangeBreakSpeedMixin extends LivingEntity {
     /**
      * @author j
      */
-    @Overwrite
-    public float getBlockBreakingSpeed(BlockState block)
-    {
+    @Inject(method = "getBlockBreakingSpeed", at = @At(value = "HEAD"), cancellable = true)
+    public void getBlockBreakingSpeed(BlockState block, CallbackInfoReturnable<Float> cir) {
+        cir.cancel();
         float f = this.inventory.getBlockBreakingSpeed(block);
-      if (f > 1.0F) {
-        int i = EnchantmentHelper.getEfficiency(this);
-        ItemStack itemStack = this.getMainHandStack();
-        if (i > 0 && !itemStack.isEmpty()) {
-            f += (float)(i * i + 1);
-        }
-    }
-
-      if (StatusEffectUtil.hasHaste(this)) {
-        f *= 1.0F + (float)(StatusEffectUtil.getHasteAmplifier(this) + 1) * 0.2F;
-    }
-
-      if (this.hasStatusEffect(StatusEffects.MINING_FATIGUE)) {
-        float k;
-        switch(Objects.requireNonNull(this.getStatusEffect(StatusEffects.MINING_FATIGUE)).getAmplifier()) {
-            case 0:
-                k = 0.3F;
-                break;
-            case 1:
-                k = 0.09F;
-                break;
-            case 2:
-                k = 0.0027F;
-                break;
-            case 3:
-            default:
-                k = 8.1E-4F;
+        if (f > 1.0F) {
+            int i = EnchantmentHelper.getEfficiency(this);
+            ItemStack itemStack = this.getMainHandStack();
+            if (i > 0 && !itemStack.isEmpty()) {
+                f += (float)(i * i + 1);
+            }
         }
 
-        f *= k;
-    }
+        if (StatusEffectUtil.hasHaste(this)) {
+            f *= 1.0F + (float)(StatusEffectUtil.getHasteAmplifier(this) + 1) * 0.2F;
+        }
 
-      if (!this.isSubmergedIn(FluidTags.WATER) && !EnchantmentHelper.hasAquaAffinity(this)) {
-        f /= 5.0F;
-    }
+        if (this.hasStatusEffect(StatusEffects.MINING_FATIGUE)) {
+            float k;
+            switch(Objects.requireNonNull(this.getStatusEffect(StatusEffects.MINING_FATIGUE)).getAmplifier()) {
+                case 0:
+                    k = 0.3F;
+                    break;
+                case 1:
+                    k = 0.09F;
+                    break;
+                case 2:
+                    k = 0.0027F;
+                    break;
+                case 3:
+                default:
+                    k = 8.1E-4F;
+            }
 
-      if (!this.onGround && !this.isSubmergedIn(FluidTags.WATER)) {
-        f /= 5.0F;
-    }
+            f *= k;
+        }
 
-      return f;
+        if (!this.isSubmergedIn(FluidTags.WATER) && !EnchantmentHelper.hasAquaAffinity(this)) {
+            f /= 5.0F;
+        }
+
+        if (!this.onGround && !this.isSubmergedIn(FluidTags.WATER)) {
+            f /= 5.0F;
+        }
+
+        cir.setReturnValue(f);
     }
 }

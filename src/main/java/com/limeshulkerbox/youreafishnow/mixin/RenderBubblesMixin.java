@@ -1,20 +1,13 @@
 package com.limeshulkerbox.youreafishnow.mixin;
 
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.ClientChatListener;
 import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.effect.StatusEffects;
-import net.minecraft.entity.player.HungerManager;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.network.MessageType;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.tag.FluidTags;
-import net.minecraft.util.Util;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -23,14 +16,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 @Mixin(InGameHud.class)
 public abstract class RenderBubblesMixin extends DrawableHelper {
-
-
 
     @Shadow @Final private MinecraftClient client;
     @Shadow private int scaledWidth;

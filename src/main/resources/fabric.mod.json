@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "id": "youre-a-fish-now",
+  "id": "youreafishnow",
   "version": "${version}",
 
   "name": "You're a fish now",
@@ -16,25 +16,24 @@
     "sources": "https://github.com/LimeShulkerBox/youre-a-fish-now"
   },
 
-  "license": "CC0-1.0",
-  "icon": "assets/modid/icon.png",
+  "license": "MIT",
+  "icon": "assets/youreafishnow/icon.png",
 
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.limeshulkerbox.youreafishnow.CanBreatheInWaterMixinInitializer"
+      "com.limeshulkerbox.youreafishnow.ModInitializer"
     ]
   },
   "mixins": [
-    "modid.mixins.json"
+    "youreafishnow.mixins.json"
   ],
 
   "depends": {
-    "fabricloader": ">=0.11.3",
-    "minecraft": "1.17.x",
-    "java": ">=16"
+    "fabricloader": ">=0.12.8",
+    "minecraft": "1.18.x",
+    "java": ">=17"
   },
   "suggests": {
-    "another-mod": "*"
   }
 }
