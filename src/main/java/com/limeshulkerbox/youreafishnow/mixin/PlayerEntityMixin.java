@@ -1,10 +1,11 @@
 package com.limeshulkerbox.youreafishnow.mixin;
 
-import net.minecraft.entity.*;
+import net.minecraft.entity.EntityType;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.player.*;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -38,7 +39,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
 	@Unique
 	protected void tickWaterBreathingAir(int air) {
-		if (this.isAlive() && !this.isSubmergedIn(FluidTags.WATER) && !this.hasStatusEffect(WATER_BREATHING) && !canBreathe()) {
+		if (this.isAlive() && !this.isSubmergedInWater() && !this.hasStatusEffect(WATER_BREATHING) && !canBreathe()) {
 			this.setAir(air - 1);
 			if (this.getAir() == -20) {
 				this.setAir(0);

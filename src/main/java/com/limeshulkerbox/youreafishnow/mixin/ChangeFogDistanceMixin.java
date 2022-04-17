@@ -31,10 +31,9 @@ public class ChangeFogDistanceMixin {
         }
         else if (cameraSubmersionType == CameraSubmersionType.WATER) {
             y = 750.0F;
-            if (entity instanceof ClientPlayerEntity) {
-                ClientPlayerEntity clientPlayerEntity = (ClientPlayerEntity)entity;
+            if (entity instanceof ClientPlayerEntity clientPlayerEntity) {
                 y *= Math.max(0.25F, clientPlayerEntity.getUnderwaterVisibility());
-                Biome biome = clientPlayerEntity.world.getBiome(clientPlayerEntity.getBlockPos());
+                Biome biome = clientPlayerEntity.world.method_23753(clientPlayerEntity.getBlockPos());
                 if (biome.getCategory() == Biome.Category.SWAMP) {
                     y *= 0.50F;
                 }

@@ -1,13 +1,11 @@
 package com.limeshulkerbox.youreafishnow.mixin;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.Blocks;
 import net.minecraft.server.network.SpawnLocating;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.ChunkSectionPos;
-import net.minecraft.util.math.Direction;
 import net.minecraft.world.Heightmap;
 import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.WorldChunk;
@@ -34,7 +32,8 @@ abstract class SpawnInWaterMixin {
                 BlockPos.Mutable mutable = new BlockPos.Mutable();
 
                 for (int k = i + 1; k > j; --k) {
-                    if (!(world.getBiome(new BlockPos(x, k, z)).getCategory().equals(Biome.Category.OCEAN) || world.getBiome(new BlockPos(x, k, z)).getCategory().equals(Biome.Category.RIVER))) continue;
+                    if (!(world.method_23753(new BlockPos(x, k, z)).getCategory().equals(Biome.Category.OCEAN) || world.method_23753(new BlockPos(x, k, z)).getCategory().equals(Biome.Category.RIVER)))
+                        continue;
                     mutable.set(x, k, z);
                     BlockState blockState = world.getBlockState(mutable);
                     BlockState blockState1 = world.getBlockState(mutable.down());

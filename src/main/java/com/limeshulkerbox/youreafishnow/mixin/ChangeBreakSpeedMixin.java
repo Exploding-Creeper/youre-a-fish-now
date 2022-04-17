@@ -9,7 +9,6 @@ import net.minecraft.entity.effect.StatusEffects;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.item.ItemStack;
-import net.minecraft.tag.FluidTags;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -30,9 +29,7 @@ public abstract class ChangeBreakSpeedMixin extends LivingEntity {
     }
 
     //copied from base with changed lines marked with /*change*/
-    /**
-     * @author j
-     */
+
     @Inject(method = "getBlockBreakingSpeed", at = @At(value = "HEAD"), cancellable = true)
     public void getBlockBreakingSpeed(BlockState block, CallbackInfoReturnable<Float> cir) {
         cir.cancel();
@@ -69,11 +66,11 @@ public abstract class ChangeBreakSpeedMixin extends LivingEntity {
             f *= k;
         }
 
-        if (!this.isSubmergedIn(FluidTags.WATER) && !EnchantmentHelper.hasAquaAffinity(this)) {
+        if (!this.isSubmergedInWater() && !EnchantmentHelper.hasAquaAffinity(this)) {
             f /= 5.0F;
         }
 
-        if (!this.onGround && !this.isSubmergedIn(FluidTags.WATER)) {
+        if (!this.onGround && !this.isSubmergedInWater()) {
             f /= 5.0F;
         }
 
