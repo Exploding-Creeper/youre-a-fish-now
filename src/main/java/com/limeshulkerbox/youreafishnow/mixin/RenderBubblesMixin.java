@@ -2,11 +2,12 @@ package com.limeshulkerbox.youreafishnow.mixin;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.gui.DrawableHelper;
-import net.minecraft.client.gui.hud.InGameHud;
+import net.minecraft.client.gui.hud.*;
 import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.tag.FluidTags;
 import net.minecraft.util.math.MathHelper;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -48,16 +49,16 @@ public abstract class RenderBubblesMixin extends DrawableHelper {
         ah = playerEntity.getMaxAir();
         ai = Math.min(playerEntity.getAir(), ah);
         if (!playerEntity.isSubmergedInWater() || ai < ah) {/*change*/
-            ad = this.getHeartRows(aa) - 1;
-            t -= ad * 10;
-            ae = MathHelper.ceil((double) (ai - 2) * 10.0D / (double) ah);
-            al = MathHelper.ceil((double) ai * 10.0D / (double) ah) - ae;
+                ad = this.getHeartRows(aa) - 1;
+                t -= ad * 10;
+                ae = MathHelper.ceil((double)(ai - 2) * 10.0D / (double)ah);
+                al = MathHelper.ceil((double)ai * 10.0D / (double)ah) - ae;
 
-            for (int ar = 0; ar < ae + al; ++ar) {
-                if (ar < ae) {
-                    this.drawTexture(matrices, n - ar * 8 - 9, t, 16, 18, 9, 9);
-                } else {
-                    this.drawTexture(matrices, n - ar * 8 - 9, t, 25, 18, 9, 9);
+                for(int ar = 0; ar < ae + al; ++ar) {
+                    if (ar < ae) {
+                        this.drawTexture(matrices, n - ar * 8 - 9, t, 16, 18, 9, 9);
+                    } else {
+                        this.drawTexture(matrices, n - ar * 8 - 9, t, 25, 18, 9, 9);
                     }
                 }
             }
