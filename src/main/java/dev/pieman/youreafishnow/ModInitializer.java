@@ -1,4 +1,4 @@
-package com.limeshulkerbox.youreafishnow;
+package dev.pieman.youreafishnow;
 
 public class ModInitializer implements net.fabricmc.api.ModInitializer {
 

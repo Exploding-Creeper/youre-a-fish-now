@@ -1,14 +1,14 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "com.limeshulkerbox.youreafishnow.mixin",
+  "package": "dev.pieman.youreafishnow.mixin",
   "compatibilityLevel": "JAVA_16",
   "mixins": [
-    "PlayerEntityMixin",
+    "SpawnInWaterMixin",
     "ChangeBreakSpeedMixin",
     "ChangeFogDistanceMixin",
-    "RenderBubblesMixin",
-    "SpawnInWaterMixin"
+    "PlayerEntityMixin",
+    "RenderBubblesMixin"
   ],
   "injectors": {
     "defaultRequire": 1

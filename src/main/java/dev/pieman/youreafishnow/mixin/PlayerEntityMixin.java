@@ -1,4 +1,4 @@
-package com.limeshulkerbox.youreafishnow.mixin;
+package dev.pieman.youreafishnow.mixin;
 
 import net.minecraft.entity.*;
 import net.minecraft.entity.damage.DamageSource;
